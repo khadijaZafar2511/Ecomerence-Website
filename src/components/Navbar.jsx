@@ -19,7 +19,7 @@ export default function Navbar() {
             >
               <img
                 className=" h-[3dvh] w-[4dvh]  lg:hidden "
-                src="/main-menu (1).png   "
+                src="public/main-menu (1).png   "
               />
             </div>
             <p className="font-semibold lg:text-3xl md:text-3xl text-xl text-blue-400 p-1  border-blue-400 rounded  border-t-3 border-b-3">
@@ -29,11 +29,14 @@ export default function Navbar() {
           <div
             className={`absolute left-0 ${state ? "top-16" : "-top-full"} bg-gray-800 w-full h-50 lg:h-16 lg:static  lg:flex  ml-0 lg:ml-6`}
           >
-            <ul className="flex flex-col items-center justify-center gap-3 py-7 lg:[&>*:hover]:border-blue-400 lg:[&>*:hover]:rounded  lg:[&>*:hover]:border-t-3 lg:[&>*:hover]:border-b-3 lg:flex-row lg:*:text-blue-40  lg:*:px-3 lg:*:py-2 ">
+            <ul
+              className="flex flex-col items-center justify-center gap-3 py-7 lg:[&>*:hover]:border-blue-400 lg:[&>*:hover]:rounded lg:[&>*:hover]:border-t-3 lg:[&>*:hover]:border-b-3
+            lg:[&>*:focus]:border-blue-400 lg:[&>*:focus]:rounded lg:[&>*:focus]:border-t-3 lg:[&>*:focus]:border-b-3 lg:flex-row [&>*:hover]:text-blue-400  lg:*:px-3 lg:*:py-2 "
+            >
               <li className="lg:px-4 lg:py-2">Home</li>
-              <li >Today's Deal</li>
-              <li >Customer Services</li>
-              <li >Shopping Cart</li>
+              <li>Today's Deal</li>
+              <li>Customer Services</li>
+              <li>Shopping Cart</li>
             </ul>
           </div>
           <div className="  h-full w-1/2 lg:w-1/3 ">
