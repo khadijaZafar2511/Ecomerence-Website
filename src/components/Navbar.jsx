@@ -19,7 +19,7 @@ export default function Navbar() {
             >
               <img
                 className=" h-[3dvh] w-[4dvh]  lg:hidden "
-                src="public/main-menu (1).png   "
+                src="/public/main-menu (1).png   "
               />
             </div>
             <p className="font-semibold lg:text-3xl md:text-3xl text-xl text-blue-400 p-1  border-blue-400 rounded  border-t-3 border-b-3">
