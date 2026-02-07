@@ -19,7 +19,7 @@ export default function Navbar() {
             >
               <img
                 className=" h-[3dvh] w-[4dvh]  lg:hidden "
-                src="/public/main-menu (1).png   "
+                src="/main-menu (1).png   "
               />
             </div>
             <p className="font-semibold lg:text-3xl md:text-3xl text-xl text-blue-400 p-1  border-blue-400 rounded  border-t-3 border-b-3">
@@ -48,7 +48,7 @@ export default function Navbar() {
                 </spam>
               </p>
               <div className=" h-4/5  w-1/2 lg:w-1/3 md:w-1/4 flex items-center justify-center hover:border-blue-400 hover:rounded  hover:border-t-3 hover:border-b-3 ">
-                <img src="/public/shopping-cart.png " className="w-auto h-9 " />
+                <img src="/shopping-cart.png " className="w-auto h-9 " />
                 <h1 className="flex items-center justify-end">Cart</h1>
               </div>
             </div>
