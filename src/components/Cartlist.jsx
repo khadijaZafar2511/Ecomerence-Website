@@ -10,23 +10,27 @@ export default function Cartlist() {
     return (
       <>
         <div className=" h-full w-full grid grid-col-1 gap-3">
-          {(console.log(cart))}
-          {cart.length!=0 ? 
+          {cart.length != 0 ? (
             cart.map((p) => (
               <div key={p.id}>
                 <Cart cart={p} />
               </div>
             ))
-          : 
-          <div className="w-full min-h-screen ">
-            <h1 className="text-2xl font-semibold  ml-150 mt-50">
-              No items in cart yet
-            </h1>
-            <button onClick={()=>{ navigate("/")}} className="h-15 w-80 border rounded-4xl text-gray-200 bg-gray-800 mt-10 ml-135 ">
-              Continoue To Shopping
-            </button>
-          </div>
-          }
+          ) : (
+            <div className="w-full min-h-screen overflow-hidden flex flex-col items-center justify-center  ">
+              <h1 className="lg:text-2xl text-xl font-semibold text-gray-700 mb-10">
+                No items in cart yet
+              </h1>
+              <button
+                onClick={() => {
+                  navigate("/");
+                }}
+                className="tracking-wider text-sm font-semibold lg:h-15 lg:w-80 h-13 w-60 border rounded-4xl text-gray-200 bg-gray-800  mb-30"
+              >
+                CONTINUE SHOPPING
+              </button>
+            </div>
+          )}
         </div>
       </>
     );

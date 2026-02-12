@@ -12,7 +12,11 @@ export const GlobalContext = createContext();
           case "setdata":
               return { ...state, data: action.payload }
           case "setcart":
-              return{...state, cart:[ ...state.cart , action.payload]}
+          return { ...state, cart: [...state.cart, action.payload] }
+        case "removecart":
+          return {
+            ...state, cart: [...state.cart.filter((filter) => filter != action.payload) ], count: state.count - 1
+          };
           default:
             return{...state}
       }

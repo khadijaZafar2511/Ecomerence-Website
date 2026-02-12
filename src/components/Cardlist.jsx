@@ -16,7 +16,7 @@ export default function Cardlist() {
         </div>
       ) : (
         <div className=" h-full w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4  py-20 lg:p-20">
-          {console.log(data)}
+      
 
           {data &&
             data.products.map((p) => (

@@ -1,10 +1,18 @@
-// import { useContext } from "react";
-// import { GlobalContext } from "../Context/context1";
+import { useContext ,useState} from "react";
+import { GlobalContext } from "../Context/context1";
+   
 
-export default function Cart({cart}) {
-    // const myvar = useContext(GlobalContext);
-    // const { state} = myvar;
-    // const { cart} = state;
+
+
+
+
+
+
+export default function Cart({ cart }) {
+  const[value,setValue]=useState(1)
+    const myvar = useContext(GlobalContext);
+    const {dispatch} = myvar;
+    
   return (
     <>
       {cart && (
@@ -26,17 +34,38 @@ export default function Cart({cart}) {
               </div>
               <div className="   flex  p-2 lg:p-4 gap-5 lg:ml-10 lg:mt-10">
                 <div className=" flex w-30 h-7 ">
-                  <button className="w-1/4 h-7 border-gray-500 bg-gray-300   flex items-center justify-center  rounded-l-xl">
+                  <button
+                    onClick={() => {
+                     if(value>1)
+                        setValue(value - 1);
+                    }}
+                    className="w-1/4 h-7 border border-gray-300 bg-gray-300   flex items-center justify-center  rounded-l-xl"
+                  >
                     <span className="text-4xl mb-2">-</span>
                   </button>
-                  <p className="w-1/4  h-7 border text-center"> 1</p>
-                  <button className="w-1/4 h-7 border border-gray-500 rounded-r-xl flex items-center justify-center">
-                    <span className="text-4xl mb-2">+</span>
+                  <input
+                    type="text"
+                    disabled
+                    value={value}
+                    min={1}
+                    max={5}
+                    className="w-1/4  h-7 border border-gray-300 text-center "
+                  />
+                  <button
+                    onClick={() => {  if (value<5) setValue(value + 1);}}
+                    className="w-1/4 h-7 border border-gray-300 rounded-r-xl flex items-center justify-center"
+                  >
+                    <span className="text-2xl mb-2">+</span>
                   </button>
                 </div>
-                <div className="w-6 h-6">
+                <button
+                  onClick={() => {
+                    dispatch({ type: "removecart", payload: cart });
+                  }}
+                  className="w-5 mt-1 h-5"
+                >
                   <img src="/bin.png" />
-                </div>
+                </button>
               </div>
             </div>
           </div1>
