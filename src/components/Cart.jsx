@@ -17,7 +17,7 @@ export default function Cart({ cart }) {
     <>
       {cart && (
         <divm className="   min-h-full w-full flex flex-col gap-3  px-4 py-2">
-          <div1 className=" shadow-gray-300 shadow-2xl w-full lg:w-2/3  flex  h-50  ">
+          <div1 className=" shadow-gray-300 shadow-2xl w-full lg:w-2/3  flex  h-55  ">
             <div className="bg-radial  from-[#c7c1B4] via-[#C4BEB0] to-[#9F9888] w-3/5 md:w-2/5 lg:w-50 ">
               <img
                 className="m-auto h-50 "
@@ -26,29 +26,22 @@ export default function Cart({ cart }) {
             </div>
             <div className="flex w-6/7 lg:w-full flex-col lg:flex-row ">
               <div className="h-full  w-full flex flex-col p-4 gap-2">
-                <p className="text-xl font-bold ">{cart.title}</p>
-                <p className="text-sm text-gray-800 font-semibold">
+                <p className="text-xl font-semibold lg:font-bold  flex">{cart.title}</p>
+                <p className="text-sm  text-gray-800 font-semibold">
                   PKR {cart.price}
                 </p>
-                <p className="text-gray-700">{`${cart.tags[0] ? cart.tags[0] : cart.title} | ${cart.tags[1] ? cart.tags[1] : cart.title}`}</p>
+                <p className="text-gray-700 text-sm">{`${cart.tags[0] ? cart.tags[0] : cart.title} | ${cart.tags[1] ? cart.tags[1] : cart.title}`}</p>
               </div>
               <div className="   flex  p-2 lg:p-4 gap-5 lg:ml-10 lg:mt-10">
                 <div className=" flex w-30 h-7 ">
                   <button
-                    onClick={() => {
-                     if(value>1)
-                        setValue(value - 1);
-                    }}
+                    onClick={() => {if(value>1) setValue(value - 1);}}
                     className="w-1/4 h-7 border border-gray-300 bg-gray-300   flex items-center justify-center  rounded-l-xl"
                   >
                     <span className="text-4xl mb-2">-</span>
                   </button>
                   <input
-                    type="text"
-                    disabled
-                    value={value}
-                    min={1}
-                    max={5}
+                    type="text" disabled value={value} min={1} max={5}
                     className="w-1/4  h-7 border border-gray-300 text-center "
                   />
                   <button
