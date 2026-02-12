@@ -30,7 +30,7 @@ export default function Cart({cart}) {
                     <span className="text-4xl mb-2">-</span>
                   </button>
                   <p className="w-1/4  h-7 border text-center"> 1</p>
-                  <button className="w-1/4 h-7 border border-gray-500 rounded-r-xl">
+                  <button className="w-1/4 h-7 border border-gray-500 rounded-r-xl flex items-center justify-center">
                     <span className="text-4xl mb-2">+</span>
                   </button>
                 </div>
