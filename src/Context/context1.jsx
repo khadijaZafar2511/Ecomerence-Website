@@ -5,20 +5,48 @@ export const GlobalContext = createContext();
     function reducer(state, action) {
       switch (action.type) {
         case "setcount":
-          return { ...state , count: state.count + 1 };
+          return { ...state, count: state.count + 1 };
 
         case "setloading":
-              return {...state,  loading: false };
-          case "setdata":
-              return { ...state, data: action.payload }
-          case "setcart":
-          return { ...state, cart: [...state.cart, action.payload] }
+          return { ...state, loading: false };
+        case "setdata":
+          return { ...state, data: action.payload };
+        case "setcart":
+          return {
+            ...state,
+            cart: [
+              ...state.cart,
+             (state.cart.find((filter) => filter == action.payload))?"":action.payload
+              
+            ],
+          };
         case "removecart":
           return {
-            ...state, cart: [...state.cart.filter((filter) => filter != action.payload) ], count: state.count - 1
+            ...state,
+            cart: [...state.cart.filter((filter) => filter != action.payload)],
+            count: state.count - 1,
           };
-          default:
-            return{...state}
+        case "valueinc":
+          return {
+            ...state,
+            value: {
+              count1:
+                state.value.count1 < 5
+                  ? state.value.count1 + 1
+                  : state.value.count1,
+              id: action.payload,
+            },
+          };
+        case "valuedec":
+          return {
+            ...state,
+            value: {
+              count1: state.value.count1 > 1 ? state.value.count1 - 1 : state.value.count1,
+              id:action.payload
+            }
+          };
+        default:
+          return { ...state };
       }
     }
   
@@ -28,7 +56,12 @@ export default function GlobalProvider({ children }) {
         count: 0,
           data: "",
           loading: true,
-        cart:[]
+        cart:[],
+        value: {
+          id: 0,
+          count1:1
+        }
+       
     };
     
 
@@ -38,7 +71,7 @@ export default function GlobalProvider({ children }) {
   useEffect(() => {
     let fetchdata = async () => {
       const res = await fetch(
-        "https://dummyjson.com/products?limit=20&skip=10&select=title,price,images,tags",
+        "https://dummyjson.com/products?limit=10&skip=10&select=title,price,images,tags",
       );
       const data = await res.json();
       if (data) {
@@ -51,7 +84,7 @@ export default function GlobalProvider({ children }) {
         
     };
     fetchdata();
-  }, [data]);
+  }, []);
 
     return (
         <>

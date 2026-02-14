@@ -10,7 +10,7 @@ export default function Navbar() {
   }
   const myvar = useContext(GlobalContext);
   const { state } = myvar;
-  const { data, count, loading } = state;
+  const {  count } = state;
  
 
 
@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <>
    
-      <header className=" h-16 w-full bg-gray-800 text-gray-200 ">
+      <header className=" h-16 w-full bg-gray-800 text-gray-200 overflow-x-hidden ">
         <nav className="h-16 w-full bg-gray-800 flex  px-3">
           <div className=" h-full lg:w-1/3 w-2/3  flex items-center justify-start  ">
             <div
