@@ -12,38 +12,46 @@ export const GlobalContext = createContext();
         case "setdata":
           return { ...state, data: action.payload };
         case "setcart":
-          return {
-            ...state,
-            cart: [
-              ...state.cart,
-             (state.cart.find((filter) => filter == action.payload))?"":action.payload
-              
-            ],
-          };
+          // also try find  method
+          const existing = state.cart.find((p) => p.id == action.payload.id)
+          try {
+            if (existing)
+              return {
+
+                // update qty here and search why its not updating here
+                ...state,
+                cart: state.cart.map(p => (p.id == action.payload.id) ? { ...p , qty:qty+1 } : p)
+              }
+            else return {
+              ...state,
+              cart: [...state.cart, { ...action.payload, qty: 1 }]
+            }
+          }
+          catch(err){console.log(err)}
+             
+         
         case "removecart":
           return {
             ...state,
             cart: [...state.cart.filter((filter) => filter != action.payload)],
             count: state.count - 1,
           };
-        case "valueinc":
+        case "incvalue":
+          
           return {
             ...state,
-            value: {
-              count1:
-                state.value.count1 < 5
-                  ? state.value.count1 + 1
-                  : state.value.count1,
-              id: action.payload,
-            },
+          
+            cart:
+              state.cart.map(p=> (p.id == action.payload.id) ?{ ...action.payload, qty:action.payload2} : p ) 
+             
           };
-        case "valuedec":
+        case "decvalue":
+       
           return {
             ...state,
-            value: {
-              count1: state.value.count1 > 1 ? state.value.count1 - 1 : state.value.count1,
-              id:action.payload
-            }
+          
+             cart:
+              state.cart.map(p=> (p.id == action.payload.id) ?{ ...action.payload, qty:action.payload2} : p )
           };
         default:
           return { ...state };
@@ -56,10 +64,11 @@ export default function GlobalProvider({ children }) {
         count: 0,
           data: "",
           loading: true,
-        cart:[],
+        cart:[ ],
         value: {
           id: 0,
-          count1:1
+          count1: 1,
+          prev:1
         }
        
     };
@@ -71,7 +80,7 @@ export default function GlobalProvider({ children }) {
   useEffect(() => {
     let fetchdata = async () => {
       const res = await fetch(
-        "https://dummyjson.com/products?limit=10&skip=10&select=title,price,images,tags",
+        "/data.json",
       );
       const data = await res.json();
       if (data) {
@@ -87,15 +96,12 @@ export default function GlobalProvider({ children }) {
   }, []);
 
     return (
-        <>
-          
-            <GlobalContext.Provider value={{ state, dispatch ,initialState}}>
-                {children}
-            </GlobalContext.Provider>
-
-
-        </>
-
+      <>
+      
+        <GlobalContext.Provider value={{ state, dispatch, initialState }}>
+          {children}
+        </GlobalContext.Provider>
+      </>
     );
 
 }

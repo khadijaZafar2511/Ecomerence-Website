@@ -4,6 +4,7 @@ import { GlobalContext } from "../Context/context1";
 export default function Cards({ data }) {
   const myvar = useContext(GlobalContext);
   const {  dispatch } = myvar;
+
   return (
     <>
       <div className="flex flex-col  gap-1  shadow-gray-300 shadow-2xl   ">
@@ -23,7 +24,7 @@ export default function Cards({ data }) {
           <button
             onClick={() => {
              (dispatch({ type: "setcount" }),
-                dispatch({ type: "setcart", payload: data }));
+               dispatch({ type: "setcart", payload: data}));
             }}
             className=" border rounded lg:h-7 lg:w-20 h-9 w-25 text-[13px] text-white bg-gray-800 mr-3"
           >

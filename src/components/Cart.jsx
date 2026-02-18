@@ -2,16 +2,17 @@ import { useContext ,useState} from "react";
 import { GlobalContext } from "../Context/context1";
 
 export default function Cart({ cart }) {
-  
+
     const myvar = useContext(GlobalContext);
   const { dispatch, state } = myvar;
   const { value } = state;
 
   return (
     <>
+   
       {cart && (
-        <divm className="   min-h-full w-full flex flex-col gap-3  px-4 py-2">
-          <div1 className=" shadow-gray-300 shadow-2xl w-full lg:w-2/3  flex items-center   h-55  ">
+        <div className="   min-h-full w-full flex flex-col gap-3  px-4 py-2">
+          <div className=" shadow-gray-300 shadow-2xl  w-full lg:w-2/3  flex items-center   h-55  ">
             <div className="bg-radial  from-[#c7c1B4] via-[#C4BEB0] to-[#9F9888] w-2/5 md:w-1/5 sm:w-1/5 lg:w-50 h-40">
               <img
                 className="w-full h-full "
@@ -24,7 +25,7 @@ export default function Cart({ cart }) {
                   {cart.title}
                 </p>
                 <p className="text-sm  text-gray-700 font-semibold">
-                  PKR {cart.price}
+                  PKR {Math.round(cart.price*cart.qty)}
                 </p>
                 <p className="text-gray-500 text-[10px] lg:text-sm md:text-sm">{`${cart.tags[0] ? cart.tags[0] : cart.title} | ${cart.tags[1] ? cart.tags[1] : cart.title}`}</p>
               </div>
@@ -32,7 +33,10 @@ export default function Cart({ cart }) {
                 <div className=" flex w-30 h-7 ">
                   <button
                     onClick={() => {
-                      dispatch({type:"valuedec",payload:cart.id})
+                     
+                      dispatch({ type: "decvalue", payload: cart, payload2:cart.qty>1 ?--cart.qty:cart.qty });
+                      
+                     
                     }}
                     className="w-1/4 h-7 border border-gray-300 bg-gray-300   flex items-center justify-center  rounded-l-xl"
                   >
@@ -41,13 +45,19 @@ export default function Cart({ cart }) {
                   <input
                     type="text"
                     disabled
-                    value={cart.id==value.id?value.count1:1}
-                  
+                    value={cart.qty}
                     className="w-1/4  h-7 border border-gray-300 text-center "
                   />
                   <button
                     onClick={() => {
-                     dispatch({type:"valueinc" , payload:cart.id})
+                   
+                    
+                         dispatch({
+                           type:"incvalue",
+                           payload: cart,
+                           payload2:cart.qty<5? ++cart.qty:cart.qty,
+                         });
+               
                     }}
                     className="w-1/4 h-7 border border-gray-300 rounded-r-xl flex items-center justify-center"
                   >
@@ -56,7 +66,10 @@ export default function Cart({ cart }) {
                 </div>
                 <button
                   onClick={() => {
-                    dispatch({ type: "removecart", payload: cart });
+                    dispatch({
+                      type: "removecart",
+                      payload: cart,
+                    });
                   }}
                   className="w-5 mt-1 h-5"
                 >
@@ -64,8 +77,8 @@ export default function Cart({ cart }) {
                 </button>
               </div>
             </div>
-          </div1>
-        </divm>
+          </div>
+        </div>
       )}
     </>
   );

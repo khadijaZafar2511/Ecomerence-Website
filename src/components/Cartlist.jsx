@@ -9,10 +9,11 @@ export default function Cartlist() {
   const navigate = useNavigate();
     return (
       <>
-        <div className=" h-full w-full grid grid-col-1 gap-3">
-          {cart.length != 0 ? (
+        {console.log(cart)}
+        <div className="mt-4 h-full w-full grid grid-col-1 gap-3">
+          {cart && cart.length != 0 ? (
             cart.map((p) => (
-              <div key={p.id}>
+              <div  key={p.id}>
                 <Cart cart={p} />
               </div>
             ))
