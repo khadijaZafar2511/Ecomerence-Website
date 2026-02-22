@@ -17,16 +17,15 @@ export default function Navbar() {
 
   return (
     <>
-   
       <header className=" h-16 w-full bg-gray-800 text-gray-200 overflow-x-hidden ">
         <nav className="h-16 w-full bg-gray-800 flex  px-3">
-          <div className=" h-full lg:w-1/3 w-2/3  flex items-center justify-start  ">
+          <div className="  h-full lg:w-1/3 w-2/3  flex items-center justify-start  ">
             <div
               onClick={toggleHandle}
-              className=" w-[6dvh] flex items-center justify-center  "
+              className=" w-7 mr-1 sm:mr-1 md:mr-2  sm:w-7 md:w-7  flex items-center   "
             >
               <img
-                className=" h-[3dvh] w-[4dvh]  lg:hidden "
+                className=" h-6 w-10  lg:hidden "
                 src="/main-menu (1).png   "
               />
             </div>
@@ -35,6 +34,7 @@ export default function Navbar() {
             </p>
           </div>
           <div
+            onClick={toggleHandle}
             className={`absolute left-0 ${state1 ? "top-16" : "-top-full"} bg-gray-800 w-full h-50 lg:h-16 lg:static  lg:flex  ml-0 lg:ml-6`}
           >
             <ul
@@ -62,9 +62,7 @@ export default function Navbar() {
                 className=" h-4/5  w-1/2 lg:w-1/3 md:w-1/4 flex items-center justify-center hover:border-blue-400 hover:rounded  hover:border-t-3 hover:border-b-3 "
               >
                 <img src="/shopping-cart.png " className="w-auto h-9 " />
-                <h1 className="flex items-center justify-end">
-                  Cart({count})
-                </h1>
+                <h1 className="flex items-center justify-end">Cart({count})</h1>
               </Link>
             </div>
           </div>
