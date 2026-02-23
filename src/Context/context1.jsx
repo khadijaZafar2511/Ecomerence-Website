@@ -79,7 +79,7 @@ export default function GlobalProvider({ children }) {
     
   useEffect(() => {
     let fetchdata = async () => {
-      const res = await fetch("/data.json");
+      const res = await fetch("https://dummyjson.com/products");
       const data = await res.json();
       if (data) {
         dispatch({ type: "setdata", payload: data });

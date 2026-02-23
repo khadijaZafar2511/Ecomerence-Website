@@ -46,7 +46,7 @@ export default function cardinfo() {
                     />
                   </div>
                 </div>
-                <div className=" lg:h-9/10 lg:w-7/10 md:h-2/5 md:w-5/6 sm:h-2/3 sm:w-2/3 h-full w-full  bg-radial from-[#c7c1B4] via-[#C4BEB0] to-[#9F9888]  ">
+                <div className=" lg:h-9/10 lg:w-7/10 md:h-1/2 md:w-9/10 sm:h-3/5 sm:w-9/10 h-full w-full  bg-radial from-[#c7c1B4] via-[#C4BEB0] to-[#9F9888]  ">
                   <img
                     src={p.images[0] ? p.images[0] : p.images[1]}
                     className="h-full  w-full "
@@ -65,17 +65,19 @@ export default function cardinfo() {
                   <p className=" px-1 mt-1 text-[13px] text-gray-700">
                     SKU: 1-26-130-A-E
                   </p>
-                  <button
-                    onClick={() => {
-                      (dispatch({ type: "setcount" }),
-                        dispatch({ type: "setcart", payload: p }));
-                    }}
-                    className=" border rounded-3xl h-16 md:h-13 lg:h-20 lg:w-1/2 w-2/3 text-[13px] text-white bg-gray-800 mt-10 ml-20 "
-                  >
-                    Add To Cart
-                  </button>
+                  
+                    <button
+                      onClick={() => {
+                        (dispatch({ type: "setcount" }),
+                          dispatch({ type: "setcart", payload: p }));
+                      }}
+                      className=" border rounded-3xl h-16 md:h-13 lg:h-20 lg:w-1/2 w-4/5 text-[13px] text-white bg-gray-800 mt-10 lg:ml-20  ml-9"
+                    >
+                      Add To Cart
+                    </button>
+                
 
-                  <div className="  lg:w-2/3 lg:h-full md:w-4/5 md:h-1/3 w-full h-2/3 lg:ml-3 md:ml-3 sm:ml-3 px-2 border-t border-t-gray-400 mt-7 text-sm  flex flex-col gap-3 overflow-y-scroll ">
+                  <div className="  lg:w-3/4 lg:h-full md:w-4/5 md:h-1/3 sm:w-4/5 sm:h-1/3 w-full h-2/3 lg:ml-3 md:ml-3 sm:ml-3 px-2 border-t border-t-gray-400 mt-7 text-sm  flex flex-col gap-3 overflow-y-scroll ">
                     <h1 className="text-gray-800 font-bold text-xl ml-2 mt-2">
                       Details
                     </h1>
