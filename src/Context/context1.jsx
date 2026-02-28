@@ -20,11 +20,11 @@ export const GlobalContext = createContext();
 
                 // update qty here and search why its not updating here
                 ...state,
-                cart: state.cart.map(p => (p.id == action.payload.id) ? { ...p , qty:p.qty+1 } : p)
+                cart: state.cart.map(p => (p.id == action.payload.id) ? { ...p , qty:p.qty+action.qnty1 } : p)
               }
             else return {
               ...state,
-              cart: [...state.cart, { ...action.payload, qty: 1 }]
+              cart: [...state.cart, { ...action.payload, qty: action.qnty1 }]
             }
           }
           catch(err){console.log(err)}
@@ -79,7 +79,7 @@ export default function GlobalProvider({ children }) {
     
   useEffect(() => {
     let fetchdata = async () => {
-      const res = await fetch("https://dummyjson.com/products");
+      const res = await fetch("./data.json");
       const data = await res.json();
       if (data) {
         dispatch({ type: "setdata", payload: data });
