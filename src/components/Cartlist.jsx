@@ -24,7 +24,7 @@ export default function Cartlist() {
               </h1>
               <button
                 onClick={() => {
-                  navigate("/");
+                  navigate("/home");
                 }}
                 className="tracking-wider text-sm font-semibold lg:h-15 lg:w-80 h-13 w-60 border rounded-4xl text-gray-200 bg-gray-800  mb-30"
               >

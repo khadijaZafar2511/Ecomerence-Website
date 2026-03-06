@@ -1,4 +1,5 @@
-import { createContext, useReducer, useEffect, useState} from "react";
+import { createContext, useReducer, useEffect, useState } from "react";
+import {fetchurl} from "../Services/Productservice"
 
 export const GlobalContext = createContext();
 
@@ -75,23 +76,48 @@ export default function GlobalProvider({ children }) {
     
 
       const [state, dispatch] = useReducer(reducer, initialState);
-    const[data,setData]=useState("")
-    
-  useEffect(() => {
-    let fetchdata = async () => {
-      const res = await fetch("./data.json");
-      const data = await res.json();
-      if (data) {
-        dispatch({ type: "setdata", payload: data });
-        dispatch({ type: "setloading" })
-        setData(data)
-      }
+  const[data,setData]=useState("")
+  const auth = () => {
+    const token1 = localStorage.getItem("token");
+    if (!token1) {
+        window.location.href="/"
+    }
+    return token1;
+}
+     const token=auth()
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "AUthorization": token
+      },
+       
 
+    };
+    // if(body)
+    // options.body=JSON.stringify(body)
+     
+  
+  useEffect(() => {
+   
+    const fetchdata = async () => {
+       const data1 =await fetchurl("","", options);
+       setData(data1)
+      console.log(data1)
+    }
+    fetchdata();
+ console.log(data)
+    if (data) {
+      dispatch({ type: "setdata", payload: data });
+      dispatch({ type: "setloading" })
+    
+      
+    }
       
         
-    };
-    fetchdata();
-  }, []);
+   
+    
+  }, [data]);
 
     return (
       <>

@@ -41,7 +41,7 @@ export default function Navbar() {
               className="flex flex-col items-center justify-center gap-3 py-7 lg:[&>*:hover]:border-blue-400 lg:[&>*:hover]:rounded lg:[&>*:hover]:border-t-3 lg:[&>*:hover]:border-b-3
             lg:[&>*:focus]:border-blue-400 lg:[&>*:focus]:rounded lg:[&>*:focus]:border-t-3 lg:[&>*:focus]:border-b-3 lg:flex-row [&>*:hover]:text-blue-400 lg:[&>*:hover]:text-gray-200 lg:*:px-3 lg:*:py-2 "
             >
-              <Link className="lg:px-4 lg:py-2" to="/">
+              <Link className="lg:px-4 lg:py-2" to="/home">
                 Home
               </Link>
               <Link to="/">Today's Deal</Link>

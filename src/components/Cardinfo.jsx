@@ -1,20 +1,53 @@
 import { GlobalContext } from "../Context/context1";
-import { useContext ,useState} from "react";
+import { useContext ,useState,useRef, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import Cardlist from "./Cardlist";
+import { fetchurl } from "../Services/Productservice";
 
 
 export default function cardinfo() {
+const [p, setP ]= useState(null)
   const myvar = useContext(GlobalContext);
+  const scrollleft = useRef(null);
   const { state, dispatch } = myvar;
   const { data } = state;
   const { id } = useParams();
   const [qnty, setQnty] = useState(1)
+  const token = localStorage.getItem("token")
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization":token
+    }
+  }
+  
+  // useEffect( () => {
+  //   const fetchdata = async() => {
+  //       const datacard = await fetchurl(id, "", options)
+  //   setP(datacard)
+  //   console.log(datacard)
+  //   }
+  //   fetchdata();
+  //  },[])
+  
+ const scrollLeft = () => {
+   // Increase scrollLeft by a set amount (e.g., 300px)
+   if (scrollleft.current) {
+     scrollleft.current.scrollLeft += 300;
+   }
+ };
+ const scrollRight = () => {
+   // Increase scrollLeft by a set amount (e.g., 300px)
+   if (scrollleft.current) {
+     scrollleft.current.scrollLeft -= 300;
+   }
+ };
   return (
     <>
       {/* <div className="h-screen w-full bg-pink-200">hello</div> */}
-
-      {data.products.map((p) =>
+     
+      { data && data.map((p) =>
         p.id != id ? null : (
           <div
             id="main"
@@ -23,7 +56,7 @@ export default function cardinfo() {
           >
             <div1 className="lg:h-full lg:w-1/2 md:h-full md:w-1/2  sm:h-full sm:w-1/2 h-4/7 w-full flex  justify-center lg:mt-35 md:mt-30 sm:mt-30 mt-5">
               <div className=" h-4/5 lg:grid lg:grid-cols-1 lg:*:w-30  lg:*:h-40 *:mt-1 md:hidden sm:hidden  *:bg-radial *:from-[#c7c1B4] *:via-[#C4BEB0] *:to-[#9F9888] overflow-y-scroll  [&::-webkit-scrollbar]:w-1    [&::-webkit-scrollbar-track]:bg-gray-100  [&::-webkit-scrollbar-thumb]:bg-gray-500  [&::-webkit-scrollbar-thumb]:rounded-none ">
-                <div className="h-full w-full">
+                <div className="h-full w-full mr-1">
                   {/* //h-9/10 w-3/10 */}
                   <img
                     src={p.images[2] ? p.images[2] : p.images[1]}
@@ -169,11 +202,62 @@ export default function cardinfo() {
                 </div>
               </div>
             </div2>
-          </div>
-        ),
-      )}
-      <div className="hidden lg:block ">
-        <Cardlist />
+         </div>
+       )
+        
+      )}  
+
+      <div className="w-full flex items-center justify-center mt-20">
+        <div className="hidden lg:block mr-4">
+          {/* //               <ArrowL handle={scrollRight}/> */}
+          {/* Aroow left */}{" "}
+          <button>
+            <svg
+              viewBox="0 0 10 17"
+              fill="none"
+              xmlns="http://www.w3.org"
+              className="w-4 h-8.25 transition-colors duration-200 "
+            >
+              <path
+                d="  M8.5 1.5L1.5 8.5L8.5 15.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-gray-400 hover:text-blue-500"
+                onClick={scrollRight}
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div
+          className=" mt-10  h-full w-10/11 grid    lg:auto-cols-[minmax(220px,1fr)]  grid-flow-col md:auto-cols-[minmax(200px,1fr)]   sm:auto-cols-[minmax(200px,1fr)]  auto-cols-[minmax(185px,1fr)]   p-2  overflow-x-auto scroll-smooth [&::-webkit-scrollbar]:hidden"
+          ref={scrollleft}
+        >
+          <Cardlist />
+        </div>
+
+        <div className="hidden lg:block ml-4">
+          {/* Aroow right */}
+
+          <svg
+            viewBox="0 0 10 17"
+            fill="none"
+            xmlns="http://www.w3.org"
+            className="w-4 h-8.25 transition-colors duration-200"
+          >
+            <path
+              d="M1.5 1.5L8.5 8.5L1.5 15.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-gray-400 hover:text-blue-500"
+              onClick={scrollLeft}
+            />
+          </svg>
+        </div>
       </div>
     </>
   );
