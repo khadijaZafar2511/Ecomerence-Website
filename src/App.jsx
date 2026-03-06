@@ -6,7 +6,7 @@ import Cardinfo from "./components/Cardinfo";
 import {BrowserRouter ,Routes,Route} from "react-router-dom"
 import GlobalProvider from "./Context/context1"
 import Home from "./components/Home"
-import Register from "./components/register";
+import Register from "./components/Register";
 import Login from "./components/Login";
 
 function App() {
