@@ -15,14 +15,16 @@ export default function Register() {
    
     const handlesubmit = async (e) => {
         e.preventDefault()
-     const res = await fetch("http://localhost:3000/auth/register", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-         
+     const res = await fetch(
+       "https://ecomerence-backened.onrender.com/auth/register",
+       {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify(formdata),
        },
-       body: JSON.stringify(formdata),
-     });
+     );
         const data = await res.json()
         if (res.ok) {
             alert("registration successfull") 

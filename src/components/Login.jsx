@@ -12,14 +12,16 @@ export default function Login() {
     const handlesubmit =async (e) => {
         e.preventDefault();
 
-        const res = await fetch("http://localhost:3000/auth/login", {
+        const res = await fetch(
+          "https://ecomerence-backened.onrender.com/auth/login",
+          {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                
+              "Content-Type": "application/json",
             },
-            body:JSON.stringify(logindata)
-        });
+            body: JSON.stringify(logindata),
+          },
+        );
         const data = await res.json();
         if (res.ok) {
             alert("login sucessfully")

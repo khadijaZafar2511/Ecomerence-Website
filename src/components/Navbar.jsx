@@ -44,9 +44,9 @@ export default function Navbar() {
               <Link className="lg:px-4 lg:py-2" to="/home">
                 Home
               </Link>
-              <Link to="/">Today's Deal</Link>
-              <Link to="/">Customer Services</Link>
-              <Link to="/">Shopping Cart</Link>
+              <Link to="/home">Today's Deal</Link>
+              <Link to="/home">Customer Services</Link>
+              <Link to="/home">Shopping Cart</Link>
             </ul>
           </div>
           <div className="  h-full w-1/2 lg:w-1/3 ">
