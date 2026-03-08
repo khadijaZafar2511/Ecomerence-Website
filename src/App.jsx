@@ -21,7 +21,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/cart" element={<Cartlist />} />
-            <Route path="home/cardinfo/:id" element={<Cardinfo />} />
+            <Route path="/home/cardinfo/:id" element={<Cardinfo />} />
           </Routes>
         </BrowserRouter>
       </GlobalProvider>

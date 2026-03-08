@@ -13,8 +13,8 @@ export default function Login() {
         e.preventDefault();
 
         const res = await fetch(
-          // "https://ecomerence-backened.onrender.com/auth/login",
           "https://ecomerence-backened.onrender.com/auth/login",
+        
           {
             method: "POST",
             headers: {
