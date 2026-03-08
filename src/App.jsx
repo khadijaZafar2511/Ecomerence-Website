@@ -26,6 +26,8 @@ function App() {
         </BrowserRouter>
       </GlobalProvider>
     </>
+    // <>
+    // <div>hello word</div></>
   );
 }
 

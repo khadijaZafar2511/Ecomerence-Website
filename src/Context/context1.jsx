@@ -79,9 +79,9 @@ export default function GlobalProvider({ children }) {
   const[data,setData]=useState("")
   const auth = () => {
     const token1 = localStorage.getItem("token");
-    if (!token1) {
-        window.location.href="/"
-    }
+    // if (!token1) {
+    //     window.location.href="/"
+    // }
     return token1;
 }
      const token=auth()
@@ -101,18 +101,17 @@ export default function GlobalProvider({ children }) {
   useEffect(() => {
    
     const fetchdata = async () => {
-       const data1 =await fetchurl("","", options);
-       setData(data1)
-      console.log(data1)
-    }
+      const data1 = await fetchurl("", "", options);
+      setData(data1);
+      console.log(data1);
+
+      console.log(data);
+      if (data) {
+        dispatch({ type: "setdata", payload: data });
+        dispatch({ type: "setloading" });
+      }
+    };
     fetchdata();
- console.log(data)
-    if (data) {
-      dispatch({ type: "setdata", payload: data });
-      dispatch({ type: "setloading" })
-    
-      
-    }
       
         
    
