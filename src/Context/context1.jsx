@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect, useState } from "react";
-import {fetchurl} from "../Services/Productservice"
+import { fetchurl } from "../Services/Productservice";
+import { useNavigate } from "react-router-dom";
 
 export const GlobalContext = createContext();
 
@@ -54,6 +55,10 @@ export const GlobalContext = createContext();
              cart:
               state.cart.map(p=> (p.id == action.payload.id) ?{ ...action.payload, qty:action.payload2} : p )
           };
+        case "setquery":
+          return {
+            ...state , query:action.payload
+          }
         default:
           return { ...state };
       }
@@ -70,18 +75,21 @@ export default function GlobalProvider({ children }) {
           id: 0,
           count1: 1,
           prev:1
-        }
+        },
+        query:""
        
     };
     
 
       const [state, dispatch] = useReducer(reducer, initialState);
-  const[data,setData]=useState("")
+  const [datac, setDatac] = useState("")
+  
+  const navigate = useNavigate();
   const auth = () => {
     const token1 = localStorage.getItem("token");
-    // if (!token1) {
-    //     window.location.href="/"
-    // }
+    if (!token1) {
+      navigate("/")
+    }
     return token1;
 }
      const token=auth()
@@ -96,27 +104,31 @@ export default function GlobalProvider({ children }) {
     };
     // if(body)
     // options.body=JSON.stringify(body)
-     
+      console.log(state);
   
   useEffect(() => {
    
     const fetchdata = async () => {
-      const data1 = await fetchurl("", "", options);
-      setData(data1);
+      const data1 = await fetchurl(state.query, options);
+      setDatac(data1);
       console.log(data1);
 
-      console.log(data);
-      if (data) {
-        dispatch({ type: "setdata", payload: data });
+      
+      if (data1) {
+        dispatch({ type: "setdata", payload: data1 });
         dispatch({ type: "setloading" });
+        
       }
+
     };
     fetchdata();
-      
+    console.log(datac);
+   
+      console.log(state.query);
         
    
     
-  }, [data]);
+  }, [state.query]);
 
     return (
       <>

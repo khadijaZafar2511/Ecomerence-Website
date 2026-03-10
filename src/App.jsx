@@ -13,8 +13,8 @@ function App() {
   
   return (
     <>
+      <BrowserRouter>
       <GlobalProvider>
-        <BrowserRouter>
           <Navbar />
           <Routes>
             <Route path="/" element={<Register />} />
@@ -23,8 +23,8 @@ function App() {
             <Route path="/cart" element={<Cartlist />} />
             <Route path="/home/cardinfo/:id" element={<Cardinfo />} />
           </Routes>
-        </BrowserRouter>
-      </GlobalProvider>
+        </GlobalProvider>
+         </BrowserRouter>
     </>
     // <>
     // <div>hello word</div></>
