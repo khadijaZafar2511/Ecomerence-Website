@@ -1,5 +1,5 @@
 import { useState,useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { GlobalContext } from "../Context/context1";
 import { fetchurl } from "../Services/Productservice";
 
@@ -13,72 +13,30 @@ export default function Navbar() {
   const myvar = useContext(GlobalContext);
   const { state, dispatch } = myvar;
   const { count } = state;
-
+  // const [mt ,setMt]=useState("mt-16")
+  const navigate = useNavigate();
   const handleinput = (e) => {
     setInput(e.target.value);
     console.log(input);
-    dispatch({ type: "setquery", payload: e.target.value })
+    
   };
- 
-
-  //   const token = localStorage.getItem("token");
-  //   const options = {
-  //     method:"GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Authorization":token
-  //     },
-  //   };
-  //   useEffect(() => {
-  //     const fetchdata = async() => {
-  //       const fdata = await fetchurl(input, input, options)
-  //       const res= await fdata.json()
-  //  }
-  //     fetchdata();
-  //   }, [])
-
-  // const auth = () => {
-  //   const token1 = localStorage.getItem("token");
-  //   if (!token1) {
-  //     navigate("/")
-  //   }
-  //   return token1;
-  // };
-  // const token = auth();
-  // const options = {
-  //   method: "GET",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     AUthorization: token,
-  //   },
-  // };
-  
-    
-
+  const handlesearch = () => {
+    if (input != "") {
+      dispatch({ type: "setquery", payload: input });
+      navigate(`search/?products=${input}`);
+    }
+    else navigate("search")
+  }
+  // const handleScroll = () => {
+  //   setMt("mt-0")
+  // }
   // useEffect(() => {
-   
-  //   // console.log(fetchurl(input, options));
-    
-  //   const fetchdata = async () => {
-  //     try {
-  //       console.log(input)
-  //       const data2 = await fetchurl(input, options);
-  //       if (data2) {
-  //         setData1(data2);
-  //      dispatch({ type: "setdata", payload: data1 });
-  //      dispatch({ type: "setloading" });
-  //      console.log("navbar");
-  //      console.log(data1);
-  //         console.log(data1)
-  //       }
-         
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //     fetchdata();
-       
+  //   window.addEventListener("scroll", handleScroll, { passive: true });
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
   //   };
-  // },[state.data])
+  // })
+ 
 
 
   return (
@@ -119,16 +77,22 @@ export default function Navbar() {
               onInput={handleinput}
               className=" border-none w-15/17 h-12 bg-white text-blue-500"
             ></input>
-            <div className="w-2/17 h-12 bg-gray-200 flex items-center justify-center">
+            <div
+              onClick={handlesearch}
+              className="w-2/17 h-12 bg-gray-200 flex items-center justify-center"
+            >
               <img className="w-2/3   h-2/3" src="/Search (2).png" />
             </div>
           </div4>
-          <div5 className="  h-16 w-full flex items-center justify-center lg:hidden md:hidden sm:hidden fixed top-16 left-0 bg-gray-800">
+          <div5 className={`h-16 w-full flex items-center justify-center lg:hidden md:hidden sm:hidden fixed top-16 left-0 bg-gray-800`} >
             <input
               onInput={handleinput}
               className=" border-none w-13/17 h-12 bg-white text-blue-500"
             ></input>
-            <div className="w-2/17 h-12 bg-gray-200 flex items-center justify-center">
+            <div
+              onClick={handlesearch}
+              className="w-2/17 h-12 bg-gray-200 flex items-center justify-center"
+            >
               <img className="w-2/3   h-2/3" src="/Search (2).png" />
             </div>
           </div5>

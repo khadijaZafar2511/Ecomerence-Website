@@ -8,6 +8,7 @@ import GlobalProvider from "./Context/context1"
 import Home from "./components/Home"
 import Register from "./components/Register";
 import Login from "./components/Login";
+import Search from "./components/search"
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/cart" element={<Cartlist />} />
             <Route path="/home/cardinfo/:id" element={<Cardinfo />} />
           </Routes>

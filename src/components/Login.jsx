@@ -13,20 +13,21 @@ export default function Login() {
         e.preventDefault();
 
         const res = await fetch(
-          "https://ecomerence-backened.onrender.com/auth/login",
-        
+          "http://localhost:3000/auth/login",
+
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
+            credentials: 'include',
             body: JSON.stringify(logindata),
           },
         );
-        const data = await res.json();
+      const data = await res.json();
+      console.log(data)
         if (res.ok) {
             alert("login sucessfully")
-            localStorage.setItem("token", data);
              window.location.href="/home"  
         } 
         

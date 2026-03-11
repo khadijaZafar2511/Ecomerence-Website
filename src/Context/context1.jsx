@@ -84,32 +84,21 @@ export default function GlobalProvider({ children }) {
       const [state, dispatch] = useReducer(reducer, initialState);
   const [datac, setDatac] = useState("")
   
-  const navigate = useNavigate();
-  const auth = () => {
-    const token1 = localStorage.getItem("token");
-    if (!token1) {
-      navigate("/")
-    }
-    return token1;
-}
-     const token=auth()
+ 
     const options = {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "AUthorization": token
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
       },
-       
-
+      credentials: "include",
     };
-    // if(body)
-    // options.body=JSON.stringify(body)
+ 
       console.log(state);
   
   useEffect(() => {
    
     const fetchdata = async () => {
-      const data1 = await fetchurl(state.query, options);
+      const data1 = await fetchurl("", options);
       setDatac(data1);
       console.log(data1);
 
