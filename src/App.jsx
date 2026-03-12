@@ -8,7 +8,7 @@ import GlobalProvider from "./Context/context1"
 import Home from "./components/Home"
 import Register from "./components/Register";
 import Login from "./components/Login";
-import Search from "./components/search"
+import Search from "./components/Search"
 
 function App() {
   
