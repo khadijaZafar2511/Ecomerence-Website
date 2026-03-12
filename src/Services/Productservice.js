@@ -1,6 +1,6 @@
 
 // const BASE_URL = "https://ecomerence-backened.onrender.com/ecomerence";
- const BASE_URL = "http://localhost:3000/ecomerence";
+ const BASE_URL = "https://ecomerence-backened.onrender.com/ecomerence";
 
 export const fetchurl = async (search="", options) => {
   try {
