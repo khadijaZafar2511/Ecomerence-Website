@@ -1,10 +1,10 @@
 
-// const BASE_URL = "https://ecomerence-backened.onrender.com/ecomerence";
- const BASE_URL = "https://ecomerence-backened.onrender.com/ecomerence";
+// const BASE_URL = "https://ecomerence-backened.onrender.com";
+ const BASE_URL = "http://localhost:3000";
 
-export const fetchurl = async (search="", options) => {
+export const fetchurl = async (url , search="", options) => {
   try {
-    const res = await fetch(`${BASE_URL}?products=${search}`, options);
+    const res = await fetch(`${BASE_URL}${url}?products=${search}`, options);
     if (!res) throw new Error("error in fetching data");
     if (res.ok) {
       return await res.json();

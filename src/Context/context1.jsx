@@ -1,6 +1,5 @@
-import { createContext, useReducer, useEffect, useState } from "react";
+import { createContext,useContext, useReducer, useEffect, useState } from "react";
 import { fetchurl } from "../Services/Productservice";
-import { useNavigate } from "react-router-dom";
 
 export const GlobalContext = createContext();
 
@@ -13,48 +12,6 @@ export const GlobalContext = createContext();
           return { ...state, loading: false };
         case "setdata":
           return { ...state, data: action.payload };
-        case "setcart":
-          // also try find  method
-          const existing = state.cart.find((p) => p.id == action.payload.id)
-          try {
-            if (existing)
-              return {
-
-                // update qty here and search why its not updating here
-                ...state,
-                cart: state.cart.map(p => (p.id == action.payload.id) ? { ...p , qty:p.qty+action.qnty1 } : p)
-              }
-            else return {
-              ...state,
-              cart: [...state.cart, { ...action.payload, qty: action.qnty1 }]
-            }
-          }
-          catch(err){console.log(err)}
-             
-         
-        case "removecart":
-          return {
-            ...state,
-            cart: [...state.cart.filter((filter) => filter != action.payload)],
-            count: state.count - 1,
-          };
-        case "incvalue":
-          
-          return {
-            ...state,
-          
-            cart:
-              state.cart.map(p=> (p.id == action.payload.id) ?{ ...action.payload, qty:action.payload2} : p ) 
-             
-          };
-        case "decvalue":
-       
-          return {
-            ...state,
-          
-             cart:
-              state.cart.map(p=> (p.id == action.payload.id) ?{ ...action.payload, qty:action.payload2} : p )
-          };
         case "setquery":
           return {
             ...state , query:action.payload
@@ -65,12 +22,10 @@ export const GlobalContext = createContext();
     }
   
 export default function GlobalProvider({ children }) {
-
       const initialState = {
         count: 0,
           data: "",
           loading: true,
-        cart:[ ],
         value: {
           id: 0,
           count1: 1,
@@ -90,33 +45,23 @@ export default function GlobalProvider({ children }) {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      credentials:"include"
     };
  
-      console.log(state);
   
   useEffect(() => {
-   
     const fetchdata = async () => {
-      const data1 = await fetchurl("", options);
-      setDatac(data1);
-      console.log(data1);
-
-      
-      if (data1) {
-        dispatch({ type: "setdata", payload: data1 });
-        dispatch({ type: "setloading" });
-        
-      }
-
+    
+        const data1 = await fetchurl("/ecomerence", "", options);
+        setDatac(data1);
+        if (data1) {
+          dispatch({ type: "setdata", payload: data1 });
+          dispatch({ type: "setloading" });
+        }
+     
+     
     };
     fetchdata();
-    console.log(datac);
-   
-      console.log(state.query);
-        
-   
-    
   }, [state.query]);
 
     return (

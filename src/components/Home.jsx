@@ -1,17 +1,16 @@
 import Cardlist from "./Cardlist";
 import { useContext,useState,useEffect } from "react";
 import { GlobalContext } from "../Context/context1";
-import { fetchurl } from "../Services/Productservice";
-import { useSearchParams,useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export default function Home() {
    const myvar = useContext(GlobalContext);
-    const { state,dispatch } = myvar; 
-  const { data, loading } = state;
+    const { state} = myvar; 
+  const {  loading } = state;
  
-     const [searchParams] = useSearchParams();
-     const title = searchParams.get("title")|| "";
-     const id = searchParams.get("id")|| "";
+    //  const [searchParams] = useSearchParams();
+    //  const title = searchParams.get("title")|| "";
+    //  const id = searchParams.get("id")|| "";
   
 
 

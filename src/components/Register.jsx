@@ -1,104 +1,188 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-
+import { useState ,useContext} from "react";
+import { PopupContext } from "../Context/popupcontext";
+import { useNavigate } from "react-router-dom";
 export default function Register() {
+
+  const navigate=useNavigate()
+const{state,dispatch2}=useContext(PopupContext)
     const [formdata, setFormdata] = useState({
-        name: "",
+      firstname: "",
+      lastname:"",
         email: "",
-        password:"",
+      password: "",
+      role: "",
+        address:""
     });
-    const hndleinput = (e) => {
+  
+  const handleChange = (e) => {
         setFormdata({ ...formdata,[ e.target.name ]:(e.target.value) })
         console.log(JSON.stringify( formdata ));
  }
 
-   
-    const handlesubmit = async (e) => {
+ const handlesubmit = async (e) => {
         e.preventDefault()
-     const res = await fetch("https://ecomerence-backened.onrender.com/auth/register", {
+     const res = await fetch("http://localhost:3000/auth/register", {
        method: "POST",
        headers: {
          "Content-Type": "application/json",
        },
        body: JSON.stringify(formdata),
-       
+       credentials: "include",
      });
-        const data = await res.json()
+   const data = await res.json()
         if (res.ok) {
             alert("registration successfull") 
           window.location.href="/login"   }
         else alert("registration failed")
-    }
-    
-    
+  }
 
-    return (
+  const navigateHandler = () => {
+   navigate("/login")
+ }
+  const crossHandler = () => {
+    if (state.open) {
+      dispatch2({ type: "setOpen", payload: false })
+         dispatch2({ type: "setRegister", payload: false });
+         dispatch2({ type: "setLogin", payload: false });
+     }
+  }
+
+  const togglePopup = () => {
+    if (state.isregister) {
+      dispatch2({ type: "setRegister", payload: false })
+      dispatch2({type:"setLogin",payload:true})
+    }
+  }
+
+  return(
       <>
-        {/* <div className="flex justify-center mt-3  h-9"><h1 className="bg-green-500 text-white w-110 h-9 text-center  border rounded <%= magic %>  ">Form Submitted Successfully !</h1></div> */}
-        <div className="flex items-center justify-center  lg:w-100 md:w-90 s,:w-90 w-80 m-auto ">
-          <div className="flex flex-col items-center mt-2 gap-4  lg:w-100  md:w-90 sm:w-90 w-80 border rounded">
-            <div className="bg-gray-800  text-white w-80  md:w-90 sm:w-90 lg:w-100 h-15 text-xl font-semibold text-center py-4  ">
-              <h1>Students Info Form</h1>
-            </div>
-            <form onSubmit={handlesubmit}>
-              <div className="flex flex-col gap-4 *:flex *:flex-col  *:gap-2 md:w-90 sm:w-90 lg:w-100 w-80 ml-5 *:w-full">
-                <div className="flex flex-col gap-2" onInput={hndleinput}>
-                  <label>Enter your name</label>
+      
+        <div className="flex   items-center justify-center min-h-screen  ">
+          <div className="w-full max-w-lg p-8 space-y-6 bg-white mt-20 sm:mt-5 rounded-lg shadow-md">
+            <h2 className="text-2xl font-bold flex justify-between  text-gray-800">
+              Create Account
+              <span>
+              {state.isregister && <img onClick={crossHandler} className="w-9 h-9" src="/cross.png" />}
+              </span>
+            </h2>
+
+            <form onSubmit={handlesubmit} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    First Name
+                  </label>
                   <input
-                    className="w-4/5 h-10  border-2"
-                    name="name"
                     type="text"
-                  />
-                </div>
-                <div onInput={hndleinput}>
-                  <label>Enter your email</label>
-                  <input
-                    className="w-4/5 h-10  border-2"
-                    name="email"
-                    type="email"
+                    name="firstname"
+                    required
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 mt-1 border border-gray-400 rounded-md focus:ring-1  focus:ring-blue-500 focus:border-blue-500 outline-none"
                   />
                 </div>
                 <div>
-                  <label>Enter your age</label>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Last Name
+                  </label>
                   <input
-                    className="w-4/5 h-10  border-2"
-                    age="age"
                     type="text"
+                    name="lastname"
+                    required
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 mt-1 border border-gray-400 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
                   />
                 </div>
-                <div onInput={hndleinput}>
-                  <label>Enter your password</label>
-                  <input
-                    className="w-4/5 h-10 border-2"
-                    name="password"
-                    type="password"
-                  />
-                </div>
-                <div>
-                  <label>Enter your adress</label>
-                  <input
-                    className="w-4/5 h-10 border-2"
-                    adress="adress"
-                    type="text"
-                  />
-                </div>
-                <div>
-                  <div className="flex flex-row">
-                    <div className="w-3/5"> Alredy have an account?<a className="ml-1 text-blue-900 font-medium"  href="/login">login</a> </div>
-                    <button
-                      className=" mb-2  bg-blue-600 text-white h-10 w-1/4 py-2 border rounded font-semibold text-center"
-                      type="submit"
-                    >
-                      Register
-                    </button>
-                  </div>
-                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 mt-1 border border-gray-400 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  required
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 mt-1 border border-gray-400 rounded-md focus:ring-1  focus:ring-blue-500 focus:border-blue-500 outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Role
+                </label>
+                <select
+                  name="role"
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 mt-1 border border-gray-400 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Detailed Address
+                </label>
+                <textarea
+                  name="address"
+                  rows="3"
+                  required
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 mt-1 border border-gray-400 rounded-md focus:ring-1  focus:ring-blue-500 focus:border-blue-500 outline-none"
+                  placeholder="House #, Street, City, Province"
+                ></textarea>
+              </div>
+            <div className="w-full flex  md:flex-row flex-col gap-3 ">
+              
+              {state.isregister && <div className="w-full md:w-2/3 flex ">
+                Alredy have an account?
+                <button
+                  onClick={togglePopup}
+                  className="ml-1 text-blue-900 font-medium"
+                >
+                  login
+                </button>
+              </div>}
+              
+              {!state.isregister && <div className="w-full md:w-2/3 flex ">
+                Alredy have an account?
+                <button
+                  onClick={navigateHandler}
+                  className="ml-1 text-blue-900 font-medium"
+                >
+                  login
+                </button>
+              </div>}
+              
+                <button
+                  type="submit"
+                  className="w-full md:w-auto px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600  transform active:scale-95 transition-all shadow-md focus:outline-none"
+                >
+                  Register Now
+                </button>
               </div>
             </form>
           </div>
         </div>
       </>
+      // document.body,
     );
+  // }
 }
 
 

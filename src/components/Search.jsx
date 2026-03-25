@@ -1,7 +1,6 @@
 import {fetchurl} from "../Services/Productservice";
-import { useEffect, useContext,useState } from "react";
-import { GlobalContext } from "../Context/context1";
-import { Link, useNavigate,useSearchParams} from "react-router-dom";
+import { useEffect,useState } from "react";
+import { Link,useSearchParams} from "react-router-dom";
 import Cards from "./Cards"
 
 
@@ -17,13 +16,11 @@ export default function search() {
     },
     credentials: "include"
   };
-console.log(query)
+
   useEffect(() => {
     const fetchdata = async () => {
-     
-        const datas = await fetchurl(query, options);
+       const datas = await fetchurl("/ecomerence",query, options);
         setData(datas)
-        console.log(data);
     }
     fetchdata();
 }, [query])

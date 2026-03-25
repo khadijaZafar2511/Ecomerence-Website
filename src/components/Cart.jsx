@@ -1,41 +1,93 @@
 import { useContext ,useState} from "react";
-import { GlobalContext } from "../Context/context1";
+import { CartContext } from "../Context/cartcontext";
+import { fetchurl } from "../Services/Productservice";
+import { AuthContext } from "../Context/authcontext";
+export default function Cart({ cartc}) {
+const[qnty, setQnty]=useState(cartc.quantity)
+const{userdata, loading}=useContext(AuthContext)
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type":"application/json"
+    },
+    credentials:"include"
+}
+ async function deletehandler ()  {
+  //  if (userdata) {
+       const fetchdata = await fetchurl(
+         `/cart/${cartc.product._id}`,
+         "",
+         options,
+       );
+       if (fetchdata.message === "success") {
+         dispatch({
+           type: "deletecart",
+           payload: cartc,
+           id: cartc.product._id,
+         });
+         dispatch({ type: "setcart", payload: fetchdata.cart });
+       } 
+  //  }
+  //  else {
+     
+  //  }
+   
+}
 
-export default function Cart({ cart }) {
+  const updatehandler = async (nextqnty) => {
+      const options2 = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ quantity: nextqnty }),
+      };
+       dispatch({
+         type: "updatevalue",
+         payload: cartc.product._id,
+         payload2: nextqnty,
+       });
+    const putdata = await fetchurl(`/cart/${cartc.product._id}`, "", options2);
+   dispatch ({type:"setcart", payload:putdata.updatecart})
+  }
 
-    const myvar = useContext(GlobalContext);
-  const { dispatch, state } = myvar;
-  const { value } = state;
+  const myvar = useContext(CartContext);
+  const { state,dispatch } = myvar;
 
   return (
     <>
-   
-      {cart && (
-        <div className="   min-h-full w-full flex flex-col gap-3  px-4 py-2">
+
+      {cartc && (
+        <div key={cartc.product._id} className="  w-full h-60 flex flex-col gap-3  px-4 py-2">
           <div className=" shadow-gray-300 shadow-2xl  w-full lg:w-2/3  flex items-center   h-55  ">
             <div className="bg-radial  from-[#c7c1B4] via-[#C4BEB0] to-[#9F9888] w-2/5 md:w-1/5 sm:w-1/5 lg:w-50 h-40">
               <img
                 className="w-full h-full "
-                src={cart.images[0] ? cart.images[0] : cart.images[1]}
+                src={cartc.product.images[0] ? cartc.product.images[0] : cartc.product.images[1]}
               />
             </div>
             <div className="flex w-6/7 lg:w-full flex-col lg:flex-row ">
               <div className="h-full  w-full flex flex-col  px-4  gap-2">
                 <p className="text-[15px] font-semibold lg:font-bold md:text-xl lg:text-xl flex">
-                  {cart.title}
+                  {cartc.product.title}
                 </p>
                 <p className="text-sm  text-gray-700 font-semibold">
-                  PKR {Math.round(cart.price*cart.qty)}
+                  PKR {Math.round(cartc.product.price*cartc.quantity)}
                 </p>
-                <p className="text-gray-500 text-[10px] lg:text-sm md:text-sm">{`${cart.tags[0] ? cart.tags[0] : cart.title} | ${cart.tags[1] ? cart.tags[1] : cart.title}`}</p>
+                <p className="text-gray-500 text-[10px] lg:text-sm md:text-sm">{`${cartc.product.tags[0] ? cartc.product.tags[0] : cartc.product.title} | ${cartc.product.tags[1] ? cartc.product.tags[1] : cartc.product.title}`}</p>
               </div>
               <div className="   flex ml-7 mt-8 lg:p-4 gap-5 lg:ml-10 ">
                 <div className=" flex w-30 h-7 ">
                   <button
                     onClick={() => {
-                     
-                      dispatch({ type: "decvalue", payload: cart, payload2:cart.qty>1 ?--cart.qty:cart.qty });
-                      
+                     let nextqnty =
+                       cartc.quantity > 1 ? cartc.quantity-1 : cartc.quantity;
+                       setQnty(
+                        nextqnty
+                       );
+                      updatehandler(nextqnty)
+                    
                      
                     }}
                     className="w-1/4 h-7 border border-gray-300 bg-gray-300   flex items-center justify-center  rounded-l-xl"
@@ -45,19 +97,17 @@ export default function Cart({ cart }) {
                   <input
                     type="text"
                     disabled
-                    value={cart.qty}
+                    value={(cartc.quantity||0)}
                     className="w-1/4  h-7 border border-gray-300 text-center "
                   />
                   <button
                     onClick={() => {
-                   
-                    
-                         dispatch({
-                           type:"incvalue",
-                           payload: cart,
-                           payload2:cart.qty<5? ++cart.qty:cart.qty,
-                         });
-               
+                      let nextqnty=cartc.quantity < 5 ? cartc.quantity+1 : cartc.quantity
+                       setQnty(
+                         nextqnty
+                       );
+                    updatehandler(nextqnty)
+              
                     }}
                     className="w-1/4 h-7 border border-gray-300 rounded-r-xl flex items-center justify-center"
                   >
@@ -65,12 +115,9 @@ export default function Cart({ cart }) {
                   </button>
                 </div>
                 <button
-                  onClick={() => {
-                    dispatch({
-                      type: "removecart",
-                      payload: cart,
-                    });
-                  }}
+                  onClick={
+                  deletehandler
+                  }
                   className="w-5 mt-1 h-5"
                 >
                   <img src="/bin.png" />

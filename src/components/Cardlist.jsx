@@ -18,9 +18,9 @@ export default function Cardlist() {
               <Link
                 to={`/home/cardinfo/${p.id}`}
                 className="flex items-center mb-3  w-25/26"
-                onClick={() => {
-                  scrollToTop();
-                }}
+                // onClick={() => {
+                //   scrollToTop();
+                // }}
                 key={p.id}
               >
                 <Cards data={p} />
