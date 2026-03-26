@@ -16,7 +16,10 @@ export default function AuthProvider({ children }){
     useEffect(() => { 
         try { 
               const fetchuser = async () => {
-                  const userd = await fetch("http://localhost:3000/me", options);
+                  const userd = await fetch(
+                    "https://ecomerence-backened.onrender.com/me",
+                    options,
+                  );
                 const user = await userd.json();
                 if (user) {
                   setUserdata(user);

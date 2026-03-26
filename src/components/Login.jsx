@@ -21,17 +21,16 @@ export default function Login() {
         e.preventDefault();
 
         const res = await fetch(
-          "http://localhost:3000/auth/login",
+          "https://ecomerence-backened.onrender.com/auth/login",
 
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            credentials:"include",
+            credentials: "include",
             body: JSON.stringify(logindata),
           },
-          
         );
     
       if (res.ok) {

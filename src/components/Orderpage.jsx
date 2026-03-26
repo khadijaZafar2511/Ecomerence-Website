@@ -24,11 +24,14 @@ export default function Orderpage() {
   useEffect(() => {
     const orderfetch = async () => {
       try {
-        const res = await fetch("http://localhost:3000/order", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://ecomerence-backened.onrender.com/order",
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+          },
+        );
         const order = await res.json();
         setOrderdata(order);
       } catch (err) {

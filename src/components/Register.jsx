@@ -21,14 +21,17 @@ const{state,dispatch2}=useContext(PopupContext)
 
  const handlesubmit = async (e) => {
         e.preventDefault()
-     const res = await fetch("http://localhost:3000/auth/register", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
+     const res = await fetch(
+       "https://ecomerence-backened.onrender.com/auth/register",
+       {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify(formdata),
+         credentials: "include",
        },
-       body: JSON.stringify(formdata),
-       credentials: "include",
-     });
+     );
    const data = await res.json()
         if (res.ok) {
             alert("registration successfull") 

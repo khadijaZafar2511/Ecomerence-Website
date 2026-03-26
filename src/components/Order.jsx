@@ -36,7 +36,10 @@ export default function Order() {
   };
   const handlerOrder = async (e) => {
     e.preventDefault()
-    const fetchorder = await fetch("http://localhost:3000/order", options);
+    const fetchorder = await fetch(
+      "https://ecomerence-backened.onrender.com/order",
+      options,
+    );
     const orderdata = await fetchorder.json()
     console.log(orderdata)
   }
