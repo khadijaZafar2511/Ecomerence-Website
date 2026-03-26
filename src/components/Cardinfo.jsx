@@ -28,15 +28,15 @@ export default function cardinfo() {
       {data &&
         data.map((p) =>
           p.id != id ? null : (
-            <div key={p.id}>
+            <div className="mt-2 overflow-x-hidden" key={p.id}>
               <Cardinfochild p={p} />
             </div>
            
           ),
         )}
 
-      <div className=" mt-8 text-center font-bold text-xl">
-        <span>you may like</span>
+      <div className=" mt-8 text-center  text-xl">
+        <span>YOU MAY ALSO LIKE</span>
       </div>
       <div className="w-full flex items-center justify-center ">
         <div className="hidden lg:block md:block sm:block mr-4">

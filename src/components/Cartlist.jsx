@@ -14,7 +14,7 @@ const navigate = useNavigate();
     return (
       <>
         {console.log(cart)}
-        <div className="mt-4 min-h-screen w-full grid  gap-1">
+        <div className="md:mt-4 mt-15  w-full grid  gap-1">
           {cart && cart.length != 0 ? (
             <>
              

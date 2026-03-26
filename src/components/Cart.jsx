@@ -59,9 +59,9 @@ const{userdata, loading}=useContext(AuthContext)
     <>
 
       {cartc && (
-        <div key={cartc.product._id} className="  w-full h-60 flex flex-col gap-3  px-4 py-2">
-          <div className=" shadow-gray-300 shadow-2xl  w-full lg:w-2/3  flex items-center   h-55  ">
-            <div className="bg-radial  from-[#c7c1B4] via-[#C4BEB0] to-[#9F9888] w-2/5 md:w-1/5 sm:w-1/5 lg:w-50 h-40">
+        <div key={cartc.product._id} className="  w-full h-50 flex flex-col gap-3  px-4 py-2">
+          <div className=" shadow-gray-300 shadow  w-full lg:w-2/3  flex items-center   h-55  ">
+            <div className="border border-gray-300 w-2/5 md:w-1/5 sm:w-1/5 lg:w-50 h-40">
               <img
                 className="w-full h-full "
                 src={cartc.product.images[0] ? cartc.product.images[0] : cartc.product.images[1]}
@@ -69,7 +69,7 @@ const{userdata, loading}=useContext(AuthContext)
             </div>
             <div className="flex w-6/7 lg:w-full flex-col lg:flex-row ">
               <div className="h-full  w-full flex flex-col  px-4  gap-2">
-                <p className="text-[15px] font-semibold lg:font-bold md:text-xl lg:text-xl flex">
+                <p className="text-[15px] text-gray-500 lg:font-bold md:text-xl lg:text-xl flex">
                   {cartc.product.title}
                 </p>
                 <p className="text-sm  text-gray-700 font-semibold">
@@ -90,7 +90,7 @@ const{userdata, loading}=useContext(AuthContext)
                     
                      
                     }}
-                    className="w-1/4 h-7 border border-gray-300 bg-gray-300   flex items-center justify-center  rounded-l-xl"
+                    className="w-1/4 h-7 border border-gray-300 bg-gray-300   flex items-center justify-center  rounded-l"
                   >
                     <span className="text-4xl mb-2">-</span>
                   </button>
@@ -109,7 +109,7 @@ const{userdata, loading}=useContext(AuthContext)
                     updatehandler(nextqnty)
               
                     }}
-                    className="w-1/4 h-7 border border-gray-300 rounded-r-xl flex items-center justify-center"
+                    className="w-1/4 h-7 border border-gray-300 rounded-r flex items-center justify-center"
                   >
                     <span className="text-2xl mb-2">+</span>
                   </button>

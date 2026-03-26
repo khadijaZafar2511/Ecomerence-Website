@@ -61,7 +61,7 @@ const [qnty, setQnty] = useState(1);
       <div
         id="main"
         key={p._id}
-        className="flex lg:flex-row md:flex-row sm:flex-row flex-col lg:gap-3     w-full h-screen   overflow-y-auto md:overflow-y-auto sm:overflow-y-visible lg:overflow-y-visible"
+        className="flex lg:flex-row md:flex-row sm:flex-row flex-col lg:gap-3   w-full h-screen   overflow-y-auto md:overflow-y-auto sm:overflow-y-visible lg:overflow-y-visible"
       >
         <div className="lg:h-full lg:w-1/2 md:h-full md:w-1/2  sm:h-full sm:w-1/2 h-4/7 w-full flex  justify-center  lg:mt-13 md:mt-13 sm:mt-10   mt-2">
           <div className=" h-full lg:grid lg:grid-cols-1 lg:*:w-30  lg:*:h-40 *:mt-1 md:hidden sm:hidden  *:bg-radial *:from-[#c7c1B4] *:via-[#C4BEB0] *:to-[#9F9888] overflow-y-scroll  [&::-webkit-scrollbar]:w-1    [&::-webkit-scrollbar-track]:bg-gray-100  [&::-webkit-scrollbar-thumb]:bg-gray-500  [&::-webkit-scrollbar-thumb]:rounded-none  overflow-x-hidden">
@@ -109,23 +109,27 @@ const [qnty, setQnty] = useState(1);
             <p className=" px-1 mt-1 text-[13px] text-gray-700 ">
               SKU: 1-26-130-A-E
             </p>
-            <div className=" flex flex-col w-2/3 gap-2  ml-7">
+            <div className=" flex flex-col md:w-2/3 w-full gap-2 border-t border-gray-200 shadow shadow-gray-300  md:ml-7 fixed z-50 left-0 bottom-0 bg-white">
               <button
                 onClick={carthandler}
-                className=" border rounded-4xl px-12 py-3  text-[15px] text-white bg-gray-800 hover:bg-gray-900 transform active:scale-95 transition-all shadow-md mt-7  "
+                className=" border rounded-4xl md:px-12 px-5 py-3  text-[15px] text-white bg-gray-800 hover:bg-gray-900 transform active:scale-95 transition-all shadow-md mt-7  "
               >
-                Add To Cart
+                ADD TO CART
               </button>
 
               <Link
                 to="/order"
                 state={{
-                  products: [{
+                  products: [
+                    {
                       product: p,
-                  quantity:qnty}] }}
-                className=" border rounded-4xl px-12 py-3  text-[15px] text-white bg-blue-500 hover:bg-blue-600 transform active:scale-95 transition-all shadow-md text-center"
+                      quantity: qnty,
+                    },
+                  ],
+                }}
+                className=" border rounded-4xl px-12 py-3 mb-2 text-[15px] text-white bg-blue-500 hover:bg-blue-600 transform active:scale-95 transition-all shadow-md text-center"
               >
-                <button>Buy Now</button>
+                <button>BUY NOW</button>
               </Link>
             </div>
             <div className="  lg:w-3/4 lg:h-4/5 md:w-5/6 md:h-4/5 sm:w-4/5 sm:h-1/3 w-full h-2/3 lg:ml-3 md:ml-3 sm:ml-3 px-2 border-t border-t-gray-400 mt-7 text-sm  flex flex-col gap-3 overflow-y-scroll  [&::-webkit-scrollbar]:w-1    [&::-webkit-scrollbar-track]:bg-gray-100  [&::-webkit-scrollbar-thumb]:bg-gray-500  [&::-webkit-scrollbar-thumb]:rounded-none ">
@@ -191,7 +195,7 @@ const [qnty, setQnty] = useState(1);
                       <div className=" flex w-70 h-7 ">
                         <button
                           onClick={() => setQnty(qnty - 1)}
-                          className="w-1/4 h-7 border border-gray-300 bg-gray-300   flex items-center justify-center  rounded-l-xl"
+                          className="w-1/4 h-7 border border-gray-300 bg-gray-300   flex items-center justify-center  rounded-l"
                         >
                           <span className="text-4xl mb-2">-</span>
                         </button>
@@ -203,7 +207,7 @@ const [qnty, setQnty] = useState(1);
                         />
                         <button
                           onClick={() => setQnty(qnty + 1)}
-                          className="w-1/4 h-7 border border-gray-300 rounded-r-xl flex items-center justify-center"
+                          className="w-1/4 h-7 border border-gray-300 rounded-r flex items-center justify-center"
                         >
                           <span className="text-2xl mb-2">+</span>
                         </button>
