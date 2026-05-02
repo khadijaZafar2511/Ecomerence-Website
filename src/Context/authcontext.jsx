@@ -30,7 +30,7 @@ export default function AuthProvider({ children }){
           }
           
           const userd = await fetch(
-            "http://localhost:3000/me",
+            "https://ecomerence-backened.onrender.com/me",
             options,
           );
           
