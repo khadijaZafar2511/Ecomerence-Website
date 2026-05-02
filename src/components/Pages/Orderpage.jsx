@@ -26,8 +26,8 @@ export default function Orderpage() {
     const orderfetch = async () => {
       try {
         const res = await fetch(
-          // "https://ecomerence-backened.onrender.com/order",
-          "http://localhost:3000/order",
+          "https://ecomerence-backened.onrender.com/order",
+          // "http://localhost:3000/order",
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
