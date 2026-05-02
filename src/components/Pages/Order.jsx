@@ -177,7 +177,7 @@ console.log(saveddata)
                       name="province"
                       onChange={handlerChange}
                       className="p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none "
-                   defaultValue={Punjab}
+                   defaultValue="Punjab"
                       >
                       <option  value="Punjab">Punjab</option>
                       <option value="Sindh">Sindh</option>

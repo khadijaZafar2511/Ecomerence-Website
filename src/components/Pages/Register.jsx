@@ -133,7 +133,7 @@ const{state,dispatch2}=useContext(PopupContext)
                   name="role"
                   onChange={handleChange}
                   className="w-full px-3 py-2 mt-1 border border-gray-400 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-                defaultValue={User}
+                defaultValue="User"
               >
                   <option value="user">User</option>
                   <option value="admin">Admin</option>
