@@ -27,27 +27,36 @@ const[saveddata,setSaveddata]=useState("")
     products.reduce((total, item) => total + item.product.price, 0) || 0;
   const totalitems =
     products.reduce((total, item) => total + item.quantity, 0) || 0;
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-    body: JSON.stringify({ saveddata, productArray }),
-  };
+
 
   const handlerOrder = async (e) => {
     e.preventDefault();
-    const fetchorder = await fetch(
-      "https://ecomerence-backened.onrender.com/order",
-      // "http://localhost:3000/order",
-      options,
-    );
-    const orderdata = await fetchorder.json();
-    console.log(orderdata);
-    if (orderdata) {
-      navigate("/payment");
+    const latestData = JSON.parse(localStorage.getItem("data"));
+    
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ saveddata: latestData, productArray }),
+    };
+    try { 
+        const fetchorder = await fetch(
+          "https://ecomerence-backened.onrender.com/order",
+          options,
+        );
+        const orderdata = await fetchorder.json();
+
+        if (fetchorder.ok) {
+          navigate("/payment");
+        } else {
+          console.error("Order failed:", orderdata.error);
+        }
+    } catch (err) {
+      console.error(err)
     }
+    
   };
 
   const infohandler = (e) => {
