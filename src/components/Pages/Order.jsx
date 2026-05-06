@@ -54,7 +54,7 @@ const[saveddata,setSaveddata]=useState("")
     e.preventDefault();
     if (formdata) {
       setSaveinfo(formdata);
-      setSaveddata(JSON.parse(localStorage.getItem("data")));
+      // setSaveddata(JSON.parse(localStorage.getItem("data")));
     }
   };
   const editHandler = () => {
@@ -62,16 +62,40 @@ const[saveddata,setSaveddata]=useState("")
     setSaveddata("")
 }
  
-  useEffect(() => {
+
+  
+useEffect(() => {
+  // 1. Guard against SSR: Only run in the browser
+  if (typeof window !== 'undefined') {
+    
+    // 2. Only save if saveinfo actually has a value
     if (saveinfo) {
-            localStorage.setItem("data", JSON.stringify(saveinfo));      
+      localStorage.setItem("data", JSON.stringify(saveinfo));
     }
-const saved = localStorage.getItem("data");
-if (saved) {
-  setSaveddata(JSON.parse(saved));
-}
+
+    // 3. Load from storage Safely
+    const saved = localStorage.getItem("data");
+    if (saved) {
+      try {
+        setSaveddata(JSON.parse(saved));
+      } catch (err) {
+        console.error("Failed to parse data", err);
+      }
+    }
+  }
+}, [saveinfo]); 
+  
+  
+//   useEffect(() => {
+//     if (saveinfo) {
+//             localStorage.setItem("data", JSON.stringify(saveinfo));      
+//     }
+// const saved = localStorage.getItem("data");
+// if (saved) {
+//   setSaveddata(JSON.parse(saved));
+// }
  
-  }, [saveinfo]);
+//   }, [saveinfo , saveddata]);
 console.log(saveddata)
   return (
     <>
