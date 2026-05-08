@@ -6,13 +6,14 @@ import Cookies from "js-cookie";
 
 export default function AuthProvider({ children }){
     const [userdata, setUserdata] = useState(null)
-    const [loading,setLoading]=useState(true)
+  const [loading, setLoading] = useState(true)
+const [loggedInFlag ,setLoggedInFlag]=useState(null)
     const options = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
   };
-  
+console.log(Cookies.get("isLoggedIn"))
 
     useEffect(() => { 
         
@@ -20,8 +21,9 @@ export default function AuthProvider({ children }){
         try {
 
 
-             const loggedInFlag = Cookies.get("isLoggedIn");
-
+          setLoggedInFlag(Cookies.get("isLoggedIn"));
+          console.log(Cookies.get("isLoggedIn"));
+console.log(loggedInFlag)
              if (!loggedInFlag) {
                // SILENT EXIT: No flag means guest. No 401 error in console!
                setUserdata(null);
@@ -52,9 +54,9 @@ export default function AuthProvider({ children }){
        
       } 
        fetchuser();
-    },[])
+    },[loggedInFlag])
     return (
-      <AuthContext.Provider value={{ userdata, setUserdata, loading }}>
+      <AuthContext.Provider value={{ userdata, setUserdata, loading  , setLoggedInFlag}}>
         { children }
         </AuthContext.Provider>
     );

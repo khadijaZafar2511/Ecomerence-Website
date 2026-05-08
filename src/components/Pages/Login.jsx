@@ -34,6 +34,7 @@ export default function Login({ prop }) {
     if (res.ok) {
       const data = await res.json();
       setUserdata(data);
+      setLoggedInFlag(Cookies.get("isLoggedIn"));
       if (prop) {
         navigate(prop, { replace: true });
      toast("Login successfully!")

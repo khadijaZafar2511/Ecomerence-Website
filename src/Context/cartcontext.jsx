@@ -18,7 +18,7 @@ function reducer (state,action) {
             const existing = state.cart.find(p => p.product._id === action.id)
             let updatedcart;
             if (existing)
-                updatedcart = state.cart.map(pr => pr.product._id === action.id ? { ...pr, quantity: pr.quantity + (action.qnty || 1) } : pr)
+                updatedcart = state.cart.map(pr => pr.product._id === action.id ? { ...pr, quantity: pr.quantity + (action.qnty1 || 1) } : pr)
              else
                updatedcart=  [...state.cart, action.payload]
              return {
